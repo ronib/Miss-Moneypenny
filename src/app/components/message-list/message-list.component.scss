@@ -1,5 +1,5 @@
 .chatlist{
-  height: 100%;
-  overflow-y: scroll;
+  height: calc(100vh - 40px);
+  margin-bottom: 50px;
 }
 

@@ -1,6 +1,12 @@
 .chatcontrol{
   float: left;
-  width: 100%;
+  max-width: 100%;
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 40px;
+
 
   .chatinput{
     width: 80%;
@@ -10,8 +16,8 @@
 
   .sendbtn{
     width: 20%;
+    height: auto;
     float: left;
-    border-radius: 0;
-    text-transform: uppercase;
+    background: url('../../../assets/images/telegram.png') no-repeat;
   }
 }

@@ -11,9 +11,9 @@ export class ChatbotComponent implements OnInit {
   public message : Message;
   public messages : Message[];
   constructor() {
-    this.message = new Message('', 'assets/images/user.png', false);
+    this.message = new Message('', 'assets/images/detective.svg', false);
     this.messages = [
-      new Message('Welcome to chatbot universe', 'assets/images/bot.png', true, new Date())
+      new Message('Welcome to chatbot universe', 'assets/images/bot.jpg', true, new Date())
     ];
    }
 
