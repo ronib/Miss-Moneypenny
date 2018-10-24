@@ -1,19 +1,28 @@
 <div class="scenarios">
   <div>
-    <div class="add-input">
-      <input type="text" [(ngModel)]="name">
-      <button type="button" (click)="addItem()">Add</button>
+    <div class="form-inline">
+      <input type="text" [(ngModel)]="name" class="form-control mb-2" placeholder="Scenario">
+      <button type="button" (click)="addItem()" class="btn btn-primary mb-2">
+        <i class="fa fa-plus"></i>
+      </button>
     </div>
-    <div>
-      <div *ngFor="let item of items" [ngClass]="{'selected': item.name === selected?.name}" (click)="selectScenario(item)">
+    <div class="list-group">
+      <button *ngFor="let item of items" type="button" (click)="selectScenario(item)" class="list-group-item list-group-item-action"
+        [ngClass]="{'active': item.name === selected?.name}">
         {{item.name}}
-      </div>
+      </button>
     </div>
   </div>
   <div>
     <ng-container *ngIf="!!selected">
-      <div>{{selected.name}}</div>
-      <div>{{selected.createdBy}}</div>
+      <div class="form-group">
+        <label>Scenario name</label>
+        <input type="text" class="form-control" [ngModel]="selected.name" readonly>
+      </div>
+      <div class="form-group">
+        <label>Created by</label>
+        <input type="text" class="form-control" [ngModel]="selected.createdBy" readonly>
+      </div>
     </ng-container>
   </div>
 </div>

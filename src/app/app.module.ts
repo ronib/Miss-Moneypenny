@@ -10,6 +10,8 @@ import { ScenariosComponent } from './settings/scenarios/scenarios.component';
 import { RulesComponent } from './settings/rules/rules.component'
 import { AppRoutingModule } from './app.routing.module';
 import { ChatbotComponent } from './chatbot/chatbot.component';
+import { HackatonService } from './services/hackaton.service';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -26,10 +28,12 @@ import { ChatbotComponent } from './chatbot/chatbot.component';
     BrowserModule,
     FormsModule,
     HttpModule,
+    HttpClientModule,
     AppRoutingModule
   ],
   providers: [
-    DialogflowService
+    DialogflowService,
+    HackatonService
   ],
   bootstrap: [AppComponent]
 })

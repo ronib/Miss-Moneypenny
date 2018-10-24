@@ -17,12 +17,13 @@ export class ScenariosComponent implements OnInit {
   }
 
   addItem() {
-    this.items.push({name: this.name, createdBy: "Felix"});
+    this.items.push({name: this.name, createdBy: "Felix", rules: []});
     this.name = '';
   }
 
   selectScenario(item) {
     this.selected = item;
+    this.selectedChange.emit(this.selected);
   }
 
 }

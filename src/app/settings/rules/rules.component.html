@@ -1,3 +1,13 @@
-<p>
-  rules works!
-</p>
+<div class="rules">
+  <button type="button" (click)="showNew = true" *ngIf="!showNew">New</button>
+  <div *ngIf="showNew">
+    <select [(ngModel)]="newItem.type">
+      <option value="Location">Location</option>
+    </select>
+    <select [(ngModel)]="newItem.country">
+      <option *ngFor="let item of countries" [value]="item">{{item}}</option>
+    </select>
+    <button type="button" (click)="addRule()">Create</button>
+    <button type="button" (click)="showNew = false">Close</button>
+  </div>
+</div>

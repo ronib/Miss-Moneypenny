@@ -10,6 +10,7 @@ export class SettingsComponent implements OnInit {
   constructor() { }
 
   scenarios: any[] = [];
+  selectedScenario: any;
   ngOnInit() {
   }
 
