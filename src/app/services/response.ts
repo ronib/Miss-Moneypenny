@@ -1,4 +1,7 @@
 import { Message } from "../models/message";
+import {ChattyKathy} from "./amazon-polly"
+import * as AWS from 'aws-sdk';
+
 import { Http, Headers } from '@angular/http';
 
 export function handleResponses(res: any, messages:any, service): void {
@@ -23,6 +26,22 @@ export function handleResponses(res: any, messages:any, service): void {
             break;
         }
     }
+  a(res, messages);
+}
+function a (res: any, messages:any){
+console.log('kkkkkkkkkkkkkkkkkkkkk');
+  var awsCredentials = new AWS.Credentials("AKIAIH2B734RKZ2MNIQA","BBTJ2QTvKVlexX2UemY9PivpB6jJjHSjVJ6sTGWs");
+  var settings = {
+    awsCredentials: awsCredentials,
+    awsRegion: "us-west-2",
+    pollyVoiceId: "Justin",
+    cacheSpeech: true
+  }
+
+  var kathy = ChattyKathy(settings);
+
+  kathy.Speak('hello, my name is ketty');
+
 }
 
 function deviceDetected(res: any, messages:any) {

@@ -1,6 +1,8 @@
 import { Component, OnInit, Input, ElementRef, ViewChild, AfterViewInit } from '@angular/core';
 import { Message } from '@app/models';
 import { DialogflowService } from '@app/services';
+import {ChattyKathy} from '../../services/amazon-polly';
+import * as AWS from 'aws-sdk';
 
 @Component({
   selector: 'message-form',
@@ -14,9 +16,17 @@ export class MessageFormComponent implements OnInit, AfterViewInit {
 
   @Input('messages')
   public messages: Message[];
-  @ViewChild("inpt") inputFld: ElementRef;
-
-  constructor(private dialogFlowService: DialogflowService) { }
+  @ViewChild('inpt') inputFld: ElementRef;
+  public settings: any;
+  constructor(private dialogFlowService: DialogflowService) {
+    const awsCredentials = new AWS.Credentials('AKIAIH2B734RKZ2MNIQA', 'BBTJ2QTvKVlexX2UemY9PivpB6jJjHSjVJ6sTGWs');
+    this.settings = {
+      awsCredentials: awsCredentials,
+      awsRegion: 'us-west-2',
+      pollyVoiceId: 'Emma',
+      cacheSpeech: true
+    };
+  }
 
   ngOnInit() {
   }
@@ -41,102 +51,111 @@ export class MessageFormComponent implements OnInit, AfterViewInit {
   }
 
   public handleResponses(res: any) {
-    console.log("handle response", res.result.fulfillment.speech);
+    console.log('handle response', res.result.fulfillment.speech);
+    const kathy = ChattyKathy(this.settings);
     switch (res.result.fulfillment.speech) {
-      case "Please connect the person's mobile device": {
+      case 'Please connect the person\'s mobile device': {
+        kathy.Speak('Please connect the person\'s mobile device');
         //statements;
-        this.deviceDetected(res);
+        this.deviceDetected(res, kathy);
         break;
       }
-      case "ok. extracting.": {
+      case 'ok. extracting.': {
         this.extracting(res);
+        kathy.Speak('Extracting');
 
         break;
       }
-      case "xxx": {
+      case 'xxx': {
         //statements;
         break;
       }
       default: {
-        //statements;
+        kathy.Speak(res.result.fulfillment.speech);
         break;
       }
     }
+
+
+
   }
 
-  public deviceDetected(res: any) {
-    console.log("deviceDetected");
+  public deviceDetected(res: any, kethyObj) {
+    console.log('deviceDetected');
     this.messages.push(
-      new Message("...", 'assets/images/bot.png', true, res.timestamp)
+      new Message('...', 'assets/images/bot.png', true, res.timestamp)
     );
 
-    
+
     setTimeout(() => {
       this.messages.splice(this.messages.length - 1, 1);
 
       this.messages.push(
-        new Message("iPhone 6s was detected. ", 'assets/images/bot.png', true, null)
-      );
-      this.messages.push(
-        new Message("Collecting relevant data from the device.", 'assets/images/bot.png', true, null)
+        new Message('iPhone 6s was detected. ', 'assets/images/bot.png', true, null)
       );
 
+      kethyObj.Speak('iPhone 6s was detected');
       this.messages.push(
-        new Message("...", 'assets/images/bot.png', true, res.timestamp)
+        new Message('Collecting relevant data from the device.', 'assets/images/bot.png', true, null)
       );
-      
+      kethyObj.Speak('Collecting relevant data from the device');
+      this.messages.push(
+        new Message('...', 'assets/images/bot.png', true, res.timestamp)
+      );
+
 
       setTimeout(() => {
-
+        //kethyObj.Speak('i suspect the person is invloved in terror activities due to the following reasons');
         let str = `i suspect the person is invloved in terror activities due to the following reasons:
               The person visited the following <b>countries</b> in the last two months:
               `;
         this.dialogFlowService.getAnalyticsResponse().subscribe(data => {
           const analytics = data.fulfillmentMessages;
-          console.log("data", analytics);
-  
+          console.log('data', analytics);
+
           const countries = analytics[1].Countries;
-          console.log("countries", countries);
-  
-          for (let c in countries) {
-            str += c + " ";
+          console.log('countries', countries);
+
+          for (const c in countries) {
+            str += c + ' ';
           }
-  
-          str += " Conversations conducted by the person in the last month contains <b>keywords</b> related to terror such as: <br>";
+
+          str += ' Conversations conducted by the person in the last month contains <b>keywords</b> related to terror such as: <br>';
           const terms = analytics[3].suspiciousTerms;
-          console.log("terms", terms);
-  
+          console.log('terms', terms);
+
           for (let i = 0; i < terms.length; i++) {
             str += `${terms[i]}   `;
           }
-  
-          str += "The person has a <b>contact</b> who apears on the counter-terror person of interest list:<br>"
+
+          str += 'The person has a <b>contact</b> who apears on the counter-terror person of interest list:<br>';
           const contacts = analytics[2].Contacts;
-          console.log("contacts", contacts);
-  
+          console.log('contacts', contacts);
+          kethyObj.Speak(str);
           str += `${contacts.Name} + <img>${contacts.Img}</img>`;
-  
+
           const media = analytics[0].Media;
-          console.log("media", media);
+          console.log('media', media);
           str += `<br> found media: ${media[0]} and ${media[1]} `;
-  
+
           this.messages.splice(this.messages.length - 1, 1);
           this.messages.push(
             new Message(str, 'assets/images/bot.png', true, res.timestamp)
           );
+
         });
-  
+
       }, 5000);
     }, 5000);
   }
 
   public extracting(res: any) {
     this.messages.push(
-      new Message("...", 'assets/images/bot.png', true, res.timestamp)
+      new Message('...', 'assets/images/bot.png', true, res.timestamp)
     );
 
 
-    
+
 
   }
 }
