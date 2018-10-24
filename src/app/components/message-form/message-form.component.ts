@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Message } from '@app/models';
 import { DialogflowService } from '@app/services';
+import { handleResponses } from '../../services/response';
 
 @Component({
   selector: 'message-form',
@@ -28,6 +29,7 @@ export class MessageFormComponent implements OnInit {
       this.messages.push(
         new Message(res.result.fulfillment.speech, 'assets/images/bot.png', true, res.timestamp)
       );
+      handleResponses(res, this.messages);
     });
 
     this.message = new Message('', 'assets/images/user.png', false);
