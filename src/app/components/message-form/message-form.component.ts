@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import {Component, OnInit, Input, ElementRef, ViewChild, AfterViewInit} from '@angular/core';
 import { Message } from '@app/models';
 import { DialogflowService } from '@app/services';
 import { handleResponses } from '../../services/response';
@@ -8,17 +8,21 @@ import { handleResponses } from '../../services/response';
   templateUrl: './message-form.component.html',
   styleUrls: ['./message-form.component.scss']
 })
-export class MessageFormComponent implements OnInit {
+export class MessageFormComponent implements OnInit, AfterViewInit {
 
   @Input('message')
   public message: Message;
 
   @Input('messages')
   public messages: Message[];
+  @ViewChild("inpt") inputFld: ElementRef;
 
   constructor(private dialogFlowService: DialogflowService) { }
 
   ngOnInit() {
+  }
+  ngAfterViewInit(){
+    this.inputFld.nativeElement.focus();
   }
 
   public sendMessage(): void {
