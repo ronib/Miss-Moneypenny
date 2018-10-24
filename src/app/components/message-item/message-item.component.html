@@ -5,7 +5,7 @@
   <img [src]="message.avatar" class="avatar" />
 </div>
   <div class="timeform" [ngStyle]="{'float': message.isRobot ? 'left' : 'right'}" style="color:#ffffff;">
-    <span class="timestamp">{{message.timestamp | date : ' HH:MM' }}</span>
+    <span class="timestamp">{{message.timestamp | date : 'HH:mm' }}</span>
   </div>
 
 <div><li class="list-group-item" [ngClass]="{'sb6':message.isRobot, 'sb5':!message.isRobot}" [ngStyle]="{'float': message.isRobot ? 'left' : 'right','background-color': message.isRobot ? '#4E8542':'#1B587C'}">

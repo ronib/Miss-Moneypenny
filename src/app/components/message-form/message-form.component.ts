@@ -38,7 +38,7 @@ export class MessageFormComponent implements OnInit, AfterViewInit {
 
     });
 
-    this.message = new Message('', 'assets/images/user.png', false);
+    this.message = new Message('', 'assets/images/detective.svg', false);
   }
 
   public handleResponses(res: any) {
