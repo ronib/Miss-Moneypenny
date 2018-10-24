@@ -12,6 +12,12 @@
     width: 80%;
     float: left;
     border-radius: 0;
+    background-color: transparent;
+    border-width: 0px 0px 3px 0px;
+    &:focus{
+      outline: none;
+    }
+
   }
 
   .sendbtn{
