@@ -68,6 +68,10 @@ export class MessageFormComponent implements OnInit, AfterViewInit {
 
         break;
       }
+      case "Sure. Opening Cellebrite Analytics": {
+        this.openingAnalytics();
+        break;
+      }
       case 'xxx': {
         //statements;
         break;
@@ -106,19 +110,20 @@ export class MessageFormComponent implements OnInit, AfterViewInit {
       );
 
 
+
       setTimeout(() => {
         kethyObj.Speak('I suspect the person is invloved in terror activities due to the following reasons');
         let str = `I suspect the person is invloved in terror activities due to the following reasons:<br>
               The person visited the following <u>countries</u> in the last two months:
               <br>
-              
-              
+
+
               <br>
               `;
         this.dialogFlowService.getAnalyticsResponse().subscribe(data => {
           const analytics = data.fulfillmentMessages;
           console.log("data", analytics);
-  
+
           const countries = analytics[1].Countries;
           console.log("countries", countries);
           str+="<b>";
@@ -142,19 +147,19 @@ export class MessageFormComponent implements OnInit, AfterViewInit {
           console.log("contacts", contacts);
 
           str += `<b>${contacts.Name}</b> <br> <img  src=${contacts.Img} />`;
-  
+
           const media = analytics[0].Media;
           console.log("media", media[0]);
           str += `<br><br> Media found for category: <b>${media[0].category}<b><br>
           <img src=${media[0].Img[0]} />
           <img src=${media[0].Img[1]} />`;
-  
+
           this.messages.splice(this.messages.length - 1, 1);
           this.messages.push(
             new Message(str, 'assets/images/bot.png', true, res.timestamp)
           );
         });
-  
+
       }, 5000);
     }, 5000);
   }
@@ -164,9 +169,11 @@ export class MessageFormComponent implements OnInit, AfterViewInit {
     this.messages.push(
       new Message("...", 'assets/images/bot.png', true, res.timestamp)
     );
+  }
 
-
-    
-
+  public openingAnalytics() {
+    setTimeout(() => {
+      window.open('./assets/images/Hackaton_Map.png');
+    }, 1000);
   }
 }
