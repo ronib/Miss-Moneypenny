@@ -13,6 +13,11 @@ export class RulesComponent implements OnInit {
   newItem: { type: string, value: string, additionalValue: number } = { type: null, value: '', additionalValue: 0 };
   countries: string[] = [];
   imageCategories: string[] = [];
+
+  rulesCountries: any[] = [];
+  rulesImages: any[] = [];
+  rulesWatchlists: any[] = [];
+  rulesContacts: any[] = [];
   constructor(private hackatonService: HackatonService) { }
 
   ngOnInit() {
@@ -41,31 +46,31 @@ export class RulesComponent implements OnInit {
 
   loadHostilCountries() {
     this.hackatonService.getHostilCountries().subscribe((data: any[]) => {
-      console.log(data);
+      this.rulesCountries = data;
     })
   }
 
   loadHostilImages() {
     this.hackatonService.getHostilImages().subscribe((data: any[]) => {
-      console.log(data);
+      this.rulesImages = data;
     })
   }
 
   loadHostilWatchlists() {
     this.hackatonService.getHostilWatchlists().subscribe((data: any[]) => {
-      console.log(data);
+      this.rulesWatchlists = data;
     })
   }
 
   loadHostilContacts() {
     this.hackatonService.getHostilContacts().subscribe((data: any[]) => {
-      console.log(data);
+      this.rulesContacts = data;
     })
   }
 
   addRule() {
     switch (this.newItem.type) {
-      case 'Location':
+      case 'Locations':
         this.saveCountries();
         break;
       case 'Images':

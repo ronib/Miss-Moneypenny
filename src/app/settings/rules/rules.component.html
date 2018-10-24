@@ -7,12 +7,12 @@
     <div class="card-body">
       <div class="form-inline">
         <select [(ngModel)]="newItem.type" class="form-control mb-2 mr-sm-2">
-          <option value="Location">Location</option>
+          <option value="Locations">Locations</option>
           <option value="Images">Images</option>
           <option value="Watchlists">Watchlists</option>
           <option value="Contacts">Contacts</option>
         </select>
-        <ng-container *ngIf="newItem.type === 'Location'">
+        <ng-container *ngIf="newItem.type === 'Locations'">
           <select [(ngModel)]="newItem.value" class="form-control mb-2 mr-sm-2">
             <option value="">[Select country]</option>
             <option *ngFor="let item of countries" [value]="item">{{item}}</option>
@@ -26,7 +26,7 @@
         </ng-container>
         <ng-container *ngIf="newItem.type === 'Images'">
           <select [(ngModel)]="newItem.value" class="form-control mb-2 mr-sm-2">
-              <option value="">[Select image category]</option>
+            <option value="">[Select image category]</option>
             <option *ngFor="let item of imageCategories" [value]="item">{{item}}</option>
           </select>
         </ng-container>
@@ -34,7 +34,7 @@
           <input type="text" class="form-control mb-2 mr-sm-2" [(ngModel)]="newItem.value" placeholder="Watchlist name">
         </ng-container>
         <ng-container *ngIf="newItem.type === 'Contacts'">
-            <input type="text" class="form-control mb-2 mr-sm-2" [(ngModel)]="newItem.value" placeholder="Contact name">
+          <input type="text" class="form-control mb-2 mr-sm-2" [(ngModel)]="newItem.value" placeholder="Contact name">
         </ng-container>
       </div>
     </div>
@@ -43,4 +43,31 @@
       <button type="button" class="btn btn-secondary" (click)="showNew = false">Close</button>
     </div>
   </div>
+
+  <ul class="list-group rules-list">
+    <li class="list-group-item" *ngIf="rulesCountries.length > 0">
+      <h5>Locations</h5>
+      <p *ngFor="let item of rulesCountries">
+        {{item.name}} - {{item.percentage | percent}}
+      </p>
+    </li>
+    <li class="list-group-item" *ngIf="rulesImages.length > 0">
+      <h5>Images</h5>
+      <p *ngFor="let item of rulesImages">
+        {{item.category}}
+      </p>
+    </li>
+    <li class="list-group-item" *ngIf="rulesWatchlists.length > 0">
+      <h5>Watchlists</h5>
+      <p *ngFor="let item of rulesWatchlists">
+        {{item.value}}
+      </p>
+    </li>
+    <li class="list-group-item" *ngIf="rulesContacts.length > 0">
+      <h5>Contacts</h5>
+      <p *ngFor="let item of rulesContacts">
+        {{item.value}}
+      </p>
+    </li>
+  </ul>
 </div>
