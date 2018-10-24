@@ -69,6 +69,7 @@ export class MessageFormComponent implements OnInit, AfterViewInit {
         break;
       }
       case "Sure. Opening Cellebrite Analytics": {
+        kathy.Speak('Sure. Opening Cellebrite Analytics');
         this.openingAnalytics();
         break;
       }
