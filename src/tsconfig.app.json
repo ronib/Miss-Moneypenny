@@ -8,7 +8,8 @@
     "paths" : {
       "@app/*" : ["app/*"],
       "@env/*" : ["environments/*"]
-    }
+    },
+    "suppressImplicitAnyIndexErrors": true
   },
   "exclude": [
     "test.ts",
