@@ -9,8 +9,8 @@ import { HackatonService } from '../../services/hackaton.service';
 export class RulesComponent implements OnInit {
 
   @Input() scenario: any;
-  showNew: boolean = true;
-  newItem: { type: string, value: string, additionalValue: number } = { type: null, value: '', additionalValue: 0 };
+  showNew: boolean = false;
+  newItem: { type: string, value: string } = { type: '', value: '' };
   countries: string[] = [];
   imageCategories: string[] = [];
 
@@ -90,10 +90,9 @@ export class RulesComponent implements OnInit {
   saveCountries() {
     this.hackatonService.createHostilCountries({
       name: this.newItem.value,
-      percentage: this.newItem.additionalValue
+      percentage: 100
     }).subscribe(() => {
-      this.newItem.value = '';
-      this.newItem.additionalValue = 0;
+      this.clearValue();
       this.loadHostilCountries();
     })
   }
@@ -102,7 +101,7 @@ export class RulesComponent implements OnInit {
     this.hackatonService.createHostilImages({
       category: this.newItem.value
     }).subscribe(() => {
-      this.newItem.value = '';
+      this.clearValue();
       this.loadHostilImages();
     })
   }
@@ -111,7 +110,7 @@ export class RulesComponent implements OnInit {
     this.hackatonService.createHostilWatchlists({
       value: this.newItem.value
     }).subscribe(() => {
-      this.newItem.value = '';
+      this.clearValue();
       this.loadHostilWatchlists();
     })
   }
@@ -120,9 +119,17 @@ export class RulesComponent implements OnInit {
     this.hackatonService.createHostilContacts({
       value: this.newItem.value
     }).subscribe(() => {
-      this.newItem.value = '';
+      this.clearValue();
       this.loadHostilContacts();
     })
+  }
+
+  changeType() {
+    this.clearValue();
+  }
+
+  clearValue() {
+    this.newItem.value = ''
   }
 
 }
