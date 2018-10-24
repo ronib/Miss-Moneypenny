@@ -13,6 +13,7 @@ import { ChatbotComponent } from './chatbot/chatbot.component';
 import { HackatonService } from './services/hackaton.service';
 import { HttpClientModule } from '@angular/common/http';
 import {CommonModule} from '@angular/common';
+import { AddRuleComponent } from './settings/rules/add-rule/add-rule.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import {CommonModule} from '@angular/common';
     SettingsComponent,
     ScenariosComponent,
     RulesComponent,
-    ChatbotComponent
+    ChatbotComponent,
+    AddRuleComponent
   ],
   imports: [
     BrowserModule,

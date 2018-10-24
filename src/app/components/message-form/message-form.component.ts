@@ -1,6 +1,7 @@
 import {Component, OnInit, Input, ElementRef, ViewChild, AfterViewInit} from '@angular/core';
 import { Message } from '@app/models';
 import { DialogflowService } from '@app/services';
+import { handleResponses } from '../../services/response';
 
 @Component({
   selector: 'message-form',
@@ -32,6 +33,7 @@ export class MessageFormComponent implements OnInit, AfterViewInit {
       this.messages.push(
         new Message(res.result.fulfillment.speech, 'assets/images/bot.png', true, res.timestamp)
       );
+      handleResponses(res, this.messages);
     });
 
     this.message = new Message('', 'assets/images/user.png', false);
