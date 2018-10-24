@@ -1,13 +1,74 @@
 <div class="rules">
-  <button type="button" (click)="showNew = true" *ngIf="!showNew">New</button>
-  <div *ngIf="showNew">
-    <select [(ngModel)]="newItem.type">
-      <option value="Location">Location</option>
-    </select>
-    <select [(ngModel)]="newItem.country">
-      <option *ngFor="let item of countries" [value]="item">{{item}}</option>
-    </select>
-    <button type="button" (click)="addRule()">Create</button>
-    <button type="button" (click)="showNew = false">Close</button>
+  <button type="button" (click)="showNew = true" *ngIf="!showNew" class="btn btn-success">Add rule</button>
+  <div *ngIf="showNew" class="card">
+    <div class="card-header">
+      Add new rule
+    </div>
+    <div class="card-body">
+      <div class="form-inline">
+        <select [(ngModel)]="newItem.type" class="form-control mb-2 mr-sm-2" (change)="changeType()">
+          <option value="">[Select type]</option>
+          <option value="Locations">Locations</option>
+          <option value="Images">Images</option>
+          <option value="Watchlists">Watchlists</option>
+          <option value="Contacts">Contacts</option>
+        </select>
+        <ng-container *ngIf="newItem.type === 'Locations'">
+          <select [(ngModel)]="newItem.value" class="form-control mb-2 mr-sm-2">
+            <option value="">[Select country]</option>
+            <option *ngFor="let item of countries" [value]="item">{{item}}</option>
+          </select>
+          <!-- <div class="input-group mb-2 mr-sm-3">
+            <input type="number" min="0" max="100" [(ngModel)]="newItem.additionalValue" class="form-control">
+            <div class="input-group-append">
+              <span class="input-group-text">%</span>
+            </div>
+          </div> -->
+        </ng-container>
+        <ng-container *ngIf="newItem.type === 'Images'">
+          <select [(ngModel)]="newItem.value" class="form-control mb-2 mr-sm-2">
+            <option value="">[Select image category]</option>
+            <option *ngFor="let item of imageCategories" [value]="item">{{item}}</option>
+          </select>
+        </ng-container>
+        <ng-container *ngIf="newItem.type === 'Watchlists'">
+          <input type="text" class="form-control mb-2 mr-sm-2" [(ngModel)]="newItem.value" placeholder="Watchlist name">
+        </ng-container>
+        <ng-container *ngIf="newItem.type === 'Contacts'">
+          <input type="text" class="form-control mb-2 mr-sm-2" [(ngModel)]="newItem.value" placeholder="Contact name">
+        </ng-container>
+      </div>
+    </div>
+    <div class="card-footer">
+      <button type="button" class="btn btn-primary" (click)="addRule()" [disabled]="newItem.value == ''">Create</button>
+      <button type="button" class="btn btn-secondary" (click)="showNew = false">Close</button>
+    </div>
   </div>
+
+  <ul class="list-group rules-list">
+    <li class="list-group-item" *ngIf="rulesCountries.length > 0">
+      <h5>Locations</h5>
+      <p *ngFor="let item of rulesCountries">
+        {{item.name}}
+      </p>
+    </li>
+    <li class="list-group-item" *ngIf="rulesImages.length > 0">
+      <h5>Images</h5>
+      <p *ngFor="let item of rulesImages">
+        {{item.category}}
+      </p>
+    </li>
+    <li class="list-group-item" *ngIf="rulesWatchlists.length > 0">
+      <h5>Watchlists</h5>
+      <p *ngFor="let item of rulesWatchlists">
+        {{item.value}}
+      </p>
+    </li>
+    <li class="list-group-item" *ngIf="rulesContacts.length > 0">
+      <h5>Contacts</h5>
+      <p *ngFor="let item of rulesContacts">
+        {{item.value}}
+      </p>
+    </li>
+  </ul>
 </div>

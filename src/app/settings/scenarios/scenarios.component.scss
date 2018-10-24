@@ -3,7 +3,15 @@
     grid-template-columns: 1fr 1fr;
     grid-column-gap: 20px;
 
-    .selected {
-        background-color: lightgray;
+    .scenario-title {
+        margin-bottom: 7px;
+    }
+
+    label {
+        color: white;
+    }
+
+    .new-scenario-input {
+        width: calc(100% - 40px);
     }
 }

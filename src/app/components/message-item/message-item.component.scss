@@ -1,14 +1,13 @@
-.list-group-item{
+.list-group-item {
   min-width: 20%;
   max-width: 70%;
-  .message {
-  font-size: 1em;
-  font-style: italic;
-  font-weight: 400;
-}
+  margin: 10px;
+ color: #ffffff;
+  border-radius: 18px;
+  font-size: 18px;
 
-.timeform {
-
+  .timeform {
+color: #ffffff;
   width: 100%;
 
   i {
@@ -20,8 +19,12 @@
   }
 }
 
+
+}
+
 .avatar{
   width: 50px;
   margin-right: 20px;
 }
-}
+
+
