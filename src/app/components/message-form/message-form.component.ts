@@ -89,7 +89,7 @@ export class MessageFormComponent implements OnInit, AfterViewInit {
       setTimeout(() => {
 
         let str = `I suspect the person is invloved in terror activities due to the following reasons:<br>
-              The person visited the following <b>countries</b> in the last two months:
+              The person visited the following <u>countries</u> in the last two months:
               <br>
               
               
@@ -101,11 +101,13 @@ export class MessageFormComponent implements OnInit, AfterViewInit {
   
           const countries = analytics[1].Countries;
           console.log("countries", countries);
-          
+          str+="<b>";
           for (let c in countries.Name) {
-            str += c + " ";
+            str += c + ",";
           }
-          str += `<img  src="${countries.Img}" />`;
+          str = str.substr(0,str.length-1);
+          str+="</b>";
+          str += `<br><img  src="${countries.Img}" />`;
           str += "<br><br> Conversations conducted by the person in the last month contains <b>keywords</b> related to terror such as: <br>";
           const terms = analytics[3].suspiciousTerms;
           console.log("terms", terms);
@@ -114,7 +116,7 @@ export class MessageFormComponent implements OnInit, AfterViewInit {
             str += `${terms[i]}   `;
           }
   
-          str += "<br><br>The person has a <b>contact</b> who apears on the counter-terror person of interest list:<br>"
+          str += "<br><br>The person has a <b>contact</b> who appears on the counter-terror person of interest list:<br>"
           const contacts = analytics[2].Contacts;
           console.log("contacts", contacts);
   
