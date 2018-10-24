@@ -16,6 +16,7 @@ import {CommonModule} from '@angular/common';
 import { AddRuleComponent } from './settings/rules/add-rule/add-rule.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { HomeComponent } from './home/home.component';
+import { ThinkingDotsComponent } from './components/thinking-dots/thinking-dots.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { HomeComponent } from './home/home.component';
     ChatbotComponent,
     AddRuleComponent,
     DashboardComponent,
-    HomeComponent
+    HomeComponent,
+    ThinkingDotsComponent
   ],
   imports: [
     BrowserModule,
