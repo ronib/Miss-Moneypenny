@@ -12,12 +12,24 @@
     width: 80%;
     float: left;
     border-radius: 0;
+    background-color: transparent;
+    border-width: 0px 0px 3px 0px;
+    &:focus{
+      outline: none;
+    }
+
   }
 
   .sendbtn{
     width: 20%;
     height: auto;
     float: left;
-    background: url('../../../assets/images/telegram.png') no-repeat;
+    background-image: url('../../../assets/images/telegram.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center center;
+    height: 40px;
+    background-color: transparent;
+
   }
 }

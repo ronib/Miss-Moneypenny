@@ -1,11 +1,28 @@
-<li class="list-group-item" [ngClass]="{'sb6':message.isRobot, 'sb5':!message.isRobot}" [ngStyle]="{'float': message.isRobot ? 'left' : 'right','background-color': message.isRobot ? '#4E8542':'#1B587C'}">
- <div style="background-color: transparent"> <img [src]="message.avatar" class="avatar" /></div>
 
-  <div class="message">
+<div>
+
+<div [ngStyle]="{'float': message.isRobot ? 'left' : 'right'}">
+  <img [src]="message.avatar" class="avatar" />
+</div>
+
+
+<div><li class="list-group-item" [ngClass]="{'sb6':message.isRobot, 'sb5':!message.isRobot}" [ngStyle]="{'float': message.isRobot ? 'left' : 'right','background-color': message.isRobot ? '#4E8542':'#1B587C'}">
+
+  <div>
+
+
+ <div>
+   <div class="message">
     {{message.content}}
   </div>
 
-  <div class="timeform">
-    <i class="fa fa-clock-o" aria-hidden="true"></i> <span class="timestamp">at {{message.timestamp | date : 'dd/MM/yyyy' }}</span>
+</div>
+
   </div>
 </li>
+
+</div>
+  <div class="timeform" style="color:#ffffff;">
+    <i class="fa fa-clock-o" aria-hidden="true"></i> <span class="timestamp">at {{message.timestamp | date : 'dd/MM/yyyy HH:MM:SS' }}</span>
+  </div>
+</div>
