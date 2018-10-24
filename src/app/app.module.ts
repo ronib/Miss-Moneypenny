@@ -14,7 +14,6 @@ import { HackatonService } from './services/hackaton.service';
 import { HttpClientModule } from '@angular/common/http';
 import {CommonModule} from '@angular/common';
 import { AddRuleComponent } from './settings/rules/add-rule/add-rule.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
 import { HomeComponent } from './home/home.component';
 import { ThinkingDotsComponent } from './components/thinking-dots/thinking-dots.component';
 
@@ -29,7 +28,6 @@ import { ThinkingDotsComponent } from './components/thinking-dots/thinking-dots.
     RulesComponent,
     ChatbotComponent,
     AddRuleComponent,
-    DashboardComponent,
     HomeComponent,
     ThinkingDotsComponent
   ],
