@@ -31,6 +31,8 @@ export class MessageFormComponent implements OnInit, AfterViewInit {
   ngOnInit() {
   }
   ngAfterViewInit() {
+    const kathy = ChattyKathy(this.settings);
+    kathy.Speak('Hello! I am Miss Moneypenny. Ron and Yossi sent me to help you. How may I assist?');
     this.inputFld.nativeElement.focus();
   }
 
