@@ -44,7 +44,7 @@ export class MessageFormComponent implements OnInit, AfterViewInit {
   public handleResponses(res: any) {
     switch (res.result.fulfillment.speech) {
       case "please connect the person's mobile device": {
-        //statements; 
+        //statements;
         this.deviceDetected(res);
         break;
       }
@@ -54,11 +54,11 @@ export class MessageFormComponent implements OnInit, AfterViewInit {
         break;
       }
       case "xxx": {
-        //statements; 
+        //statements;
         break;
       }
       default: {
-        //statements; 
+        //statements;
         break;
       }
     }
@@ -115,6 +115,7 @@ export class MessageFormComponent implements OnInit, AfterViewInit {
         console.log("media", media);
         str += `<br> found media: ${media[0]} and ${media[1]} `;
 
+        this.messages.splice(this.messages.length - 1, 1);
         this.messages.push(
           new Message(str, 'assets/images/bot.png', true, res.timestamp)
         );

@@ -15,7 +15,12 @@
 
  <div>
    <div class="message">
-    {{message.content}}
+     <div [ngSwitch]="message.content">
+       <ng-container *ngSwitchCase="'...'">
+         <app-thinking-dots></app-thinking-dots>
+       </ng-container>
+       <div *ngSwitchDefault [innerHtml]="message.content"></div>
+     </div>
   </div>
 
 </div>

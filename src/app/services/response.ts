@@ -5,21 +5,21 @@ export function handleResponses(res: any, messages:any, service): void {
 
     switch (res.result.fulfillment.speech) {
         case "please connect the person's mobile device": {
-            //statements; 
+            //statements;
             deviceDetected(res, messages);
             break;
         }
         case "ok. extracting.": {
-            extracting(res, messages, service); 
+            extracting(res, messages, service);
 
             break;
         }
         case "xxx": {
-            //statements; 
+            //statements;
             break;
         }
         default: {
-            //statements; 
+            //statements;
             break;
         }
     }
