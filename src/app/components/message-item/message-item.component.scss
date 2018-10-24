@@ -1,11 +1,14 @@
-.message {
+.list-group-item{
+  min-width: 20%;
+  max-width: 70%;
+  .message {
   font-size: 1em;
   font-style: italic;
   font-weight: 400;
 }
 
 .timeform {
-  float: left;
+
   width: 100%;
 
   i {
@@ -20,4 +23,5 @@
 .avatar{
   width: 50px;
   margin-right: 20px;
+}
 }
