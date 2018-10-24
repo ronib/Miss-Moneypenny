@@ -4,19 +4,29 @@ import { FormsModule }   from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { AppComponent } from './app.component';
 import { DialogflowService } from '@app/services';
-import { MessageListComponent, MessageFormComponent, MessageItemComponent } from '@app/components'
+import { MessageListComponent, MessageFormComponent, MessageItemComponent } from '@app/components';
+import { SettingsComponent } from './settings/settings.component';
+import { ScenariosComponent } from './settings/scenarios/scenarios.component';
+import { RulesComponent } from './settings/rules/rules.component'
+import { AppRoutingModule } from './app.routing.module';
+import { ChatbotComponent } from './chatbot/chatbot.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     MessageListComponent,
     MessageFormComponent,
-    MessageItemComponent
+    MessageItemComponent,
+    SettingsComponent,
+    ScenariosComponent,
+    RulesComponent,
+    ChatbotComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
-    HttpModule
+    HttpModule,
+    AppRoutingModule
   ],
   providers: [
     DialogflowService

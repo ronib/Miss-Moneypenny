@@ -1,0 +1,19 @@
+<div class="scenarios">
+  <div>
+    <div class="add-input">
+      <input type="text" [(ngModel)]="name">
+      <button type="button" (click)="addItem()">Add</button>
+    </div>
+    <div>
+      <div *ngFor="let item of items" [ngClass]="{'selected': item.name === selected?.name}" (click)="selectScenario(item)">
+        {{item.name}}
+      </div>
+    </div>
+  </div>
+  <div>
+    <ng-container *ngIf="!!selected">
+      <div>{{selected.name}}</div>
+      <div>{{selected.createdBy}}</div>
+    </ng-container>
+  </div>
+</div>
