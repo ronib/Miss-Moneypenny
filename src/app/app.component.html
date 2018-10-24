@@ -1,7 +1,12 @@
 <!--The content below is only a placeholder and can be replaced.-->
 <div>
+  <nav>
+    <a [routerLink]="['/']" routerLinkActive="router-link-active">Home</a>
+    <a [routerLink]="['/settings']" routerLinkActive="router-link-active">Settings</a>
+    <div class="animation start-home"></div>
+  </nav>
   <div>
-    <a [routerLink]="['/settings']" routerLinkActive="router-link-active" >Settings</a>
+
   </div>
   <router-outlet></router-outlet>
 </div>
