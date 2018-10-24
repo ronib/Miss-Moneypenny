@@ -3,7 +3,6 @@ import { Routes, RouterModule } from '@angular/router';
 import { SettingsComponent } from './settings/settings.component';
 import { ChatbotComponent } from './chatbot/chatbot.component';
 import { HomeComponent } from './home/home.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
 
 const routes: Routes = [
     {
