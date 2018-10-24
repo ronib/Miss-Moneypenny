@@ -1,6 +1,8 @@
 import { Component, OnInit, Input, ElementRef, ViewChild, AfterViewInit } from '@angular/core';
 import { Message } from '@app/models';
 import { DialogflowService } from '@app/services';
+import {ChattyKathy} from '../../services/amazon-polly';
+import * as AWS from 'aws-sdk';
 
 @Component({
   selector: 'message-form',
@@ -14,9 +16,17 @@ export class MessageFormComponent implements OnInit, AfterViewInit {
 
   @Input('messages')
   public messages: Message[];
-  @ViewChild("inpt") inputFld: ElementRef;
-
-  constructor(private dialogFlowService: DialogflowService) { }
+  @ViewChild('inpt') inputFld: ElementRef;
+  public settings: any;
+  constructor(private dialogFlowService: DialogflowService) {
+    const awsCredentials = new AWS.Credentials('AKIAIH2B734RKZ2MNIQA', 'BBTJ2QTvKVlexX2UemY9PivpB6jJjHSjVJ6sTGWs');
+    this.settings = {
+      awsCredentials: awsCredentials,
+      awsRegion: 'us-west-2',
+      pollyVoiceId: 'Emma',
+      cacheSpeech: true
+    };
+  }
 
   ngOnInit() {
   }
@@ -41,15 +51,18 @@ export class MessageFormComponent implements OnInit, AfterViewInit {
   }
 
   public handleResponses(res: any) {
-    console.log("handle response", res.result.fulfillment.speech);
+    console.log('handle response', res.result.fulfillment.speech);
+    const kathy = ChattyKathy(this.settings);
     switch (res.result.fulfillment.speech) {
-      case "Please connect the person's mobile device": {
+      case 'Please connect the person\'s mobile device': {
+        kathy.Speak('Please connect the person\'s mobile device');
         //statements;
-        this.deviceDetected(res);
+        this.deviceDetected(res, kathy);
         break;
       }
-      case "ok. extracting.": {
+      case 'ok. extracting.': {
         this.extracting(res);
+        kathy.Speak('Extracting');
 
         break;
       }
@@ -57,21 +70,24 @@ export class MessageFormComponent implements OnInit, AfterViewInit {
         this.openingAnalytics();
         break;
       }
-      case "xxx": {
+      case 'xxx': {
         //statements;
         break;
       }
       default: {
-        //statements;
+        kathy.Speak(res.result.fulfillment.speech);
         break;
       }
     }
+
+
+
   }
 
-  public deviceDetected(res: any) {
-    console.log("deviceDetected");
+  public deviceDetected(res: any, kethyObj) {
+    console.log('deviceDetected');
     this.messages.push(
-      new Message("...", 'assets/images/bot.png', true, res.timestamp)
+      new Message('...', 'assets/images/bot.png', true, res.timestamp)
     );
 
 
@@ -79,19 +95,22 @@ export class MessageFormComponent implements OnInit, AfterViewInit {
       this.messages.splice(this.messages.length - 1, 1);
 
       this.messages.push(
-        new Message("iPhone 6s was detected. ", 'assets/images/bot.png', true, null)
-      );
-      this.messages.push(
-        new Message("Collecting relevant data from the device.", 'assets/images/bot.png', true, null)
+        new Message('iPhone 6s was detected. ', 'assets/images/bot.png', true, null)
       );
 
+      kethyObj.Speak('iPhone 6s was detected');
       this.messages.push(
-        new Message("...", 'assets/images/bot.png', true, res.timestamp)
+        new Message('Collecting relevant data from the device.', 'assets/images/bot.png', true, null)
       );
+      kethyObj.Speak('Collecting relevant data from the device');
+      this.messages.push(
+        new Message('...', 'assets/images/bot.png', true, res.timestamp)
+      );
+
 
 
       setTimeout(() => {
-
+        kethyObj.Speak('I suspect the person is invloved in terror activities due to the following reasons');
         let str = `I suspect the person is invloved in terror activities due to the following reasons:<br>
               The person visited the following <u>countries</u> in the last two months:
               <br>
@@ -148,10 +167,6 @@ export class MessageFormComponent implements OnInit, AfterViewInit {
     this.messages.push(
       new Message("...", 'assets/images/bot.png', true, res.timestamp)
     );
-
-
-
-
   }
 
   public openingAnalytics() {
