@@ -86,9 +86,12 @@ export class MessageFormComponent implements OnInit, AfterViewInit {
       for (let i = 0; i < analytics.length; i++) {
         if (i == 0) {
           const media = analytics[0].Media;
+          console.log("media", media);
           str += `found media: ${media[0]} and ${media[1]} `;
         } else if (i == 1) {
           const countries = analytics[1].Countries;
+          console.log("countries", countries);
+
           str += `countries are:`;
           for (let c in countries) {
             str += c + " ";
@@ -96,11 +99,15 @@ export class MessageFormComponent implements OnInit, AfterViewInit {
         }
         else if (i == 2) {
           const contacts = analytics[2].Contacts;
-          console.log(contacts);
+          console.log("contacts", contacts);
+
           str += `contacts are: ${contacts.Name} + ${contacts.Img}`;
 
         } else if (i == 3) {
+
           const terms = analytics[3].suspiciousTerms;
+          console.log("terms", terms);
+
           str += `terms are: `;
           for (let i = 0; i < terms.length; i++) {
             str += `${terms[i]}   `;
