@@ -26,11 +26,11 @@ export class MessageFormComponent implements OnInit {
 
     this.dialogFlowService.getResponse(this.message.content).subscribe(res => {
       this.messages.push(
-        new Message(res.result.fulfillment.speech, 'assets/images/bot.png', res.timestamp, false)
+        new Message(res.result.fulfillment.speech, 'assets/images/bot.png', true, res.timestamp)
       );
     });
 
-    this.message = new Message('', 'assets/images/user.png');
+    this.message = new Message('', 'assets/images/user.png', false);
   }
 
 }
