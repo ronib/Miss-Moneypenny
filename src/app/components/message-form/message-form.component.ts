@@ -105,57 +105,66 @@ export class MessageFormComponent implements OnInit, AfterViewInit {
 
 
       setTimeout(() => {
-        //kethyObj.Speak('i suspect the person is invloved in terror activities due to the following reasons');
-        let str = `i suspect the person is invloved in terror activities due to the following reasons:
-              The person visited the following <b>countries</b> in the last two months:
+
+        let str = `I suspect the person is invloved in terror activities due to the following reasons:<br>
+              The person visited the following <u>countries</u> in the last two months:
+              <br>
+              
+              
+              <br>
               `;
         this.dialogFlowService.getAnalyticsResponse().subscribe(data => {
           const analytics = data.fulfillmentMessages;
-          console.log('data', analytics);
-
+          console.log("data", analytics);
+  
           const countries = analytics[1].Countries;
-          console.log('countries', countries);
-
-          for (const c in countries) {
-            str += c + ' ';
+          console.log("countries", countries);
+          str+="<b>";
+          for (let c in countries.Name) {
+            str += c + ",";
           }
-
-          str += ' Conversations conducted by the person in the last month contains <b>keywords</b> related to terror such as: <br>';
+          str = str.substr(0,str.length-1);
+          str+="</b>";
+          str += `<br><img  src="${countries.Img}" />`;
+          str += "<br><br> Conversations conducted by the person in the last month contains <b>keywords</b> related to terror such as: <br>";
           const terms = analytics[3].suspiciousTerms;
-          console.log('terms', terms);
-
+          console.log("terms", terms);
+          str+="<b>";
           for (let i = 0; i < terms.length; i++) {
-            str += `${terms[i]}   `;
+            str += `${terms[i]}, `;
           }
-
-          str += 'The person has a <b>contact</b> who apears on the counter-terror person of interest list:<br>';
+          str = str.substr(0,str.length-2);
+          str+="</b>";
+          str += "<br><br>The person has a <b>contact</b> who appears on the counter-terror person of interest list:<br>"
           const contacts = analytics[2].Contacts;
-          console.log('contacts', contacts);
+          console.log("contacts", contacts);
           kethyObj.Speak(str);
-          str += `${contacts.Name} + <img>${contacts.Img}</img>`;
-
+          str += `<b>${contacts.Name}</b> <br> <img  src=${contacts.Img} />`;
+  
           const media = analytics[0].Media;
-          console.log('media', media);
-          str += `<br> found media: ${media[0]} and ${media[1]} `;
-
+          console.log("media", media[0]);
+          str += `<br><br> Media found for category: <b>${media[0].category}<b><br>
+          <img src=${media[0].Img[0]} />
+          <img src=${media[0].Img[1]} />`;
+  
           this.messages.splice(this.messages.length - 1, 1);
           this.messages.push(
             new Message(str, 'assets/images/bot.png', true, res.timestamp)
           );
-
         });
-
+  
       }, 5000);
     }, 5000);
   }
 
+
   public extracting(res: any) {
     this.messages.push(
-      new Message('...', 'assets/images/bot.png', true, res.timestamp)
+      new Message("...", 'assets/images/bot.png', true, res.timestamp)
     );
 
 
-
+    
 
   }
 }
