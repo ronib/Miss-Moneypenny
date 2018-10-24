@@ -1,4 +1,4 @@
-import {Component, OnInit, Input, ElementRef, ViewChild, AfterViewInit} from '@angular/core';
+import { Component, OnInit, Input, ElementRef, ViewChild, AfterViewInit } from '@angular/core';
 import { Message } from '@app/models';
 import { DialogflowService } from '@app/services';
 import { handleResponses } from '../../services/response';
@@ -21,7 +21,7 @@ export class MessageFormComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
   }
-  ngAfterViewInit(){
+  ngAfterViewInit() {
     this.inputFld.nativeElement.focus();
   }
 
@@ -79,56 +79,48 @@ export class MessageFormComponent implements OnInit, AfterViewInit {
     this.messages.push(
       new Message("...", 'assets/images/bot.png', true, res.timestamp)
     );
-    this.dialogFlowService.getAnalyticsResponse().subscribe(data => {
-      const analytics = data.fulfillmentMessages;
-      console.log("data", analytics);
-      let str = "";
-      for (let i = 0; i < analytics.length; i++) {
-        if (i == 0) {
-          const media = analytics[0].Media;
-          console.log("media", media);
-          str += `found media: ${media[0]} and ${media[1]} `;
-        } else if (i == 1) {
-          const countries = analytics[1].Countries;
-          console.log("countries", countries);
 
-          str += `countries are:`;
-          for (let c in countries) {
-            str += c + " ";
-          }
-        }
-        else if (i == 2) {
-          const contacts = analytics[2].Contacts;
-          console.log("contacts", contacts);
 
-          str += `contacts are: ${contacts.Name} + ${contacts.Img}`;
-
-        } else if (i == 3) {
-
-          const terms = analytics[3].suspiciousTerms;
-          console.log("terms", terms);
-
-          str += `terms are: `;
-          for (let i = 0; i < terms.length; i++) {
-            str += `${terms[i]}   `;
-          }
-          // console.log(terms);
-
-        }
-      }
-
-      this.messages.push(
-        new Message(str, 'assets/images/bot.png', true, res.timestamp)
-      );
-    });
     setTimeout(() => {
-      this.messages.push(
-        new Message(`i suspect the person is invloved in terror activities due to the following reasons:
-            The person visited the following <b>countries</b>:
-            Syria
-            Iran
-            `, 'assets/images/bot.png', true, null)
-      );
+
+      let str = `i suspect the person is invloved in terror activities due to the following reasons:
+            The person visited the following <b>countries</b> in the last two months:
+            `;
+      this.dialogFlowService.getAnalyticsResponse().subscribe(data => {
+        const analytics = data.fulfillmentMessages;
+        console.log("data", analytics);
+
+        const countries = analytics[1].Countries;
+        console.log("countries", countries);
+
+        for (let c in countries) {
+          str += c + " ";
+        }
+
+        str += " Conversations conducted by the person in the last month contains <b>keywords</b> related to terror such as: <br>";
+        const terms = analytics[3].suspiciousTerms;
+        console.log("terms", terms);
+
+        for (let i = 0; i < terms.length; i++) {
+          str += `${terms[i]}   `;
+        }
+
+        str += "The person has a <b>contact</b> who apears on the counter-terror person of interest list:<br>"
+        const contacts = analytics[2].Contacts;
+        console.log("contacts", contacts);
+
+        str += `${contacts.Name} + <img>${contacts.Img}</img>`;
+
+        const media = analytics[0].Media;
+        console.log("media", media);
+        str += `<br> found media: ${media[0]} and ${media[1]} `;
+
+        this.messages.push(
+          new Message(str, 'assets/images/bot.png', true, res.timestamp)
+        );
+      });
+
     }, 5000);
+
   }
 }
