@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import {USB, USBDevice, USBOptions} from 'webusb';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',

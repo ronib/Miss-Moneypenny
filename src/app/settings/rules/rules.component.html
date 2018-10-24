@@ -6,7 +6,8 @@
     </div>
     <div class="card-body">
       <div class="form-inline">
-        <select [(ngModel)]="newItem.type" class="form-control mb-2 mr-sm-2">
+        <select [(ngModel)]="newItem.type" class="form-control mb-2 mr-sm-2" (change)="changeType()">
+          <option value="">[Select type]</option>
           <option value="Locations">Locations</option>
           <option value="Images">Images</option>
           <option value="Watchlists">Watchlists</option>
@@ -17,12 +18,12 @@
             <option value="">[Select country]</option>
             <option *ngFor="let item of countries" [value]="item">{{item}}</option>
           </select>
-          <div class="input-group mb-2 mr-sm-3">
+          <!-- <div class="input-group mb-2 mr-sm-3">
             <input type="number" min="0" max="100" [(ngModel)]="newItem.additionalValue" class="form-control">
             <div class="input-group-append">
               <span class="input-group-text">%</span>
             </div>
-          </div>
+          </div> -->
         </ng-container>
         <ng-container *ngIf="newItem.type === 'Images'">
           <select [(ngModel)]="newItem.value" class="form-control mb-2 mr-sm-2">
@@ -48,7 +49,7 @@
     <li class="list-group-item" *ngIf="rulesCountries.length > 0">
       <h5>Locations</h5>
       <p *ngFor="let item of rulesCountries">
-        {{item.name}} - {{item.percentage | percent}}
+        {{item.name}}
       </p>
     </li>
     <li class="list-group-item" *ngIf="rulesImages.length > 0">
