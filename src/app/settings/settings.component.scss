@@ -3,4 +3,12 @@
     grid-template-columns: 3fr 4fr;
     grid-column-gap: 10px;
     padding: 30px;
+    .home {
+        position: absolute;
+        top: 5px;
+        left: 5px;
+        color: white;
+        font-size: 24px;
+        cursor: pointer;
+    }
 }

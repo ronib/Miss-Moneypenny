@@ -11,18 +11,12 @@ const routes: Routes = [
         component: HomeComponent
     },
     {
-        path: 'dashboard',
-        component: DashboardComponent,
-        children: [
-            {
-                path: '',
-                component: ChatbotComponent
-            },
-            {
-                path: 'settings',
-                component: SettingsComponent
-            }
-        ]
+        path: 'chatbot',
+        component: ChatbotComponent
+    },
+    {
+        path: 'settings',
+        component: SettingsComponent
     }
 ];
 
