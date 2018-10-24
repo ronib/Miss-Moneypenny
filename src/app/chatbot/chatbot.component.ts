@@ -13,7 +13,7 @@ export class ChatbotComponent implements OnInit {
   constructor() {
     this.message = new Message('', 'assets/images/detective.svg', false);
     this.messages = [
-      new Message('Hello! I am Miss Moneypenny. Ron and Yossi sent me to help you. How may I assist?', 'assets/images/bot.jpg', true, new Date())
+      new Message('Hello! I am Miss Moneypenny. Ron and Yossi sent me to help you. How may I assist?', 'assets/images/bot.png', true, new Date())
     ];
    }
 
