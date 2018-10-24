@@ -6,6 +6,7 @@
   right: 0;
   bottom: 6px;
   height: 40px;
+  margin-left: 150px;
 
 
   .chatinput{
@@ -14,9 +15,14 @@
     border-radius: 0;
     background-color: transparent;
     border-width: 0px 0px 3px 0px;
+    color: #ffffff;
     &:focus{
       outline: none;
     }
+
+    outline-style:none;
+    box-shadow:none;
+    border-color:transparent;
 
   }
 
