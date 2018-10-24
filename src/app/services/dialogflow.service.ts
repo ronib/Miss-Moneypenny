@@ -30,4 +30,12 @@ export class DialogflowService {
     headers.append('Authorization', `Bearer ${this.token}`);
     return headers;
   }
+
+  public getAnalyticsResponse() {
+    return this.http
+      .post(`https://hackcell.herokuapp.com/`, null)
+      .map((res:any) => {
+        return res.json()
+      })
+  }
 }
