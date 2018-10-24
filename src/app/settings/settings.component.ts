@@ -7,11 +7,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SettingsComponent implements OnInit {
 
-  constructor() { }
-
-  scenarios: any[] = [];
+  scenarios: any[] = [{name: 'Terror', createdBy: 'Felix', rules: []}];
   selectedScenario: any;
+  constructor() {
+    this.selectedScenario = this.scenarios[0];
+  }
+
   ngOnInit() {
+
   }
 
 }

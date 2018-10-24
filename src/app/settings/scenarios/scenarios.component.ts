@@ -21,6 +21,12 @@ export class ScenariosComponent implements OnInit {
     this.name = '';
   }
 
+  keyDown($event) {
+    if ($event.keyCode == 13) {
+      this.addItem();
+    }
+  }
+
   selectScenario(item) {
     this.selected = item;
     this.selectedChange.emit(this.selected);

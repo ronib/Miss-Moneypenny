@@ -17,4 +17,32 @@ export class HackatonService {
     createHostilCountries(data) {
         return this.httpClient.post(`${this.baseUrl}hostile_countries/create`, data);
     }
+
+    getImageCategories() {
+        return this.httpClient.get(`${this.baseUrl}image-categories/all`);
+    }
+
+    getHostilImages() {
+        return this.httpClient.get(`${this.baseUrl}image-categories/list`);
+    }
+
+    createHostilImages(data) {
+        return this.httpClient.post(`${this.baseUrl}image-categories/create`, data);
+    }
+
+    getHostilWatchlists() {
+        return this.httpClient.get(`${this.baseUrl}watchlist/list`);
+    }
+
+    createHostilWatchlists(data) {
+        return this.httpClient.post(`${this.baseUrl}watchlist/create`, data);
+    }
+
+    getHostilContacts() {
+        return this.httpClient.get(`${this.baseUrl}identifiers/list`);
+    }
+
+    createHostilContacts(data) {
+        return this.httpClient.post(`${this.baseUrl}identifiers/create`, data);
+    }
 }

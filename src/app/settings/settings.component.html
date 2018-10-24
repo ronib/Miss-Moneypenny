@@ -1,7 +1,6 @@
 <div class="settings">
   <div>
     <app-scenarios [items]="scenarios" [(selected)]="selectedScenario"></app-scenarios>
-    {{scenarios | json}}
   </div>
   <div>
     <app-rules [scenario]="selectedScenario"></app-rules>
