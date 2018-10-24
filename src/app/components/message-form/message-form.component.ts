@@ -105,7 +105,7 @@ export class MessageFormComponent implements OnInit, AfterViewInit {
 
 
       setTimeout(() => {
-
+        kethyObj.Speak('I suspect the person is invloved in terror activities due to the following reasons');
         let str = `I suspect the person is invloved in terror activities due to the following reasons:<br>
               The person visited the following <u>countries</u> in the last two months:
               <br>
@@ -138,7 +138,7 @@ export class MessageFormComponent implements OnInit, AfterViewInit {
           str += "<br><br>The person has a <b>contact</b> who appears on the counter-terror person of interest list:<br>"
           const contacts = analytics[2].Contacts;
           console.log("contacts", contacts);
-          kethyObj.Speak(str);
+
           str += `<b>${contacts.Name}</b> <br> <img  src=${contacts.Img} />`;
   
           const media = analytics[0].Media;
