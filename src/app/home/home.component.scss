@@ -1,0 +1,36 @@
+.home {
+  padding: 150px 200px;
+
+
+  .center {
+    display: flex;
+    align-items: center;
+    .welcome {
+      flex-grow: 1;
+      color: white;
+      .hello {
+        font-size: 70px;
+      }
+      .miss-money {
+        font-size: 40px;
+      }
+      .additional {
+        font-size: 30px;
+      }
+    }
+    .image {
+      flex-grow: 1;
+      a {
+        width: 250px;
+        height: 250px;
+        display: block;
+
+        img {
+          width: 100%;
+          height: 100%;
+        }
+      }
+
+    }
+  }
+}
