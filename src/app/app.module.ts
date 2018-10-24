@@ -10,6 +10,7 @@ import { ScenariosComponent } from './settings/scenarios/scenarios.component';
 import { RulesComponent } from './settings/rules/rules.component'
 import { AppRoutingModule } from './app.routing.module';
 import { ChatbotComponent } from './chatbot/chatbot.component';
+import {CommonModule} from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { ChatbotComponent } from './chatbot/chatbot.component';
     BrowserModule,
     FormsModule,
     HttpModule,
-    AppRoutingModule
+    AppRoutingModule,
+    CommonModule
   ],
   providers: [
     DialogflowService

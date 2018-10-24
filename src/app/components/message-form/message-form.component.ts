@@ -10,10 +10,10 @@ import { DialogflowService } from '@app/services';
 export class MessageFormComponent implements OnInit {
 
   @Input('message')
-  private message : Message;
+  public message: Message;
 
   @Input('messages')
-  private messages : Message[];
+  public messages: Message[];
 
   constructor(private dialogFlowService: DialogflowService) { }
 
