@@ -111,20 +111,21 @@ export class MessageFormComponent implements OnInit, AfterViewInit {
           str += "<br><br> Conversations conducted by the person in the last month contains <b>keywords</b> related to terror such as: <br>";
           const terms = analytics[3].suspiciousTerms;
           console.log("terms", terms);
-  
+          str+="<b>";
           for (let i = 0; i < terms.length; i++) {
-            str += `${terms[i]}   `;
+            str += `${terms[i]}, `;
           }
-  
+          str = str.substr(0,str.length-2);
+          str+="</b>";
           str += "<br><br>The person has a <b>contact</b> who appears on the counter-terror person of interest list:<br>"
           const contacts = analytics[2].Contacts;
           console.log("contacts", contacts);
   
-          str += `${contacts.Name} <br> <img  src=${contacts.Img} />`;
+          str += `<b>${contacts.Name}</b> <br> <img  src=${contacts.Img} />`;
   
           const media = analytics[0].Media;
           console.log("media", media[0]);
-          str += `<br><br> Media found for category: ${media[0].category}<br>
+          str += `<br><br> Media found for category: <b>${media[0].category}<b><br>
           <img src=${media[0].Img[0]} />
           <img src=${media[0].Img[1]} />`;
   
