@@ -1,4 +1,4 @@
-<li class="list-group-item">
+<li class="list-group-item" [ngStyle]="{'float': message.isRobot ? 'left' : 'right'}">
   <img [src]="message.avatar" class="avatar"/>
   <div class="message">
     {{message.content}}

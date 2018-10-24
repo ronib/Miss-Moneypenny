@@ -12,6 +12,7 @@ import { AppRoutingModule } from './app.routing.module';
 import { ChatbotComponent } from './chatbot/chatbot.component';
 import { HackatonService } from './services/hackaton.service';
 import { HttpClientModule } from '@angular/common/http';
+import {CommonModule} from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { HttpClientModule } from '@angular/common/http';
     FormsModule,
     HttpModule,
     HttpClientModule,
-    AppRoutingModule
+    AppRoutingModule,
+    CommonModule
   ],
   providers: [
     DialogflowService,

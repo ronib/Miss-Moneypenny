@@ -10,10 +10,10 @@ import { DialogflowService } from '@app/services';
 export class MessageFormComponent implements OnInit {
 
   @Input('message')
-  private message : Message;
+  public message: Message;
 
   @Input('messages')
-  private messages : Message[];
+  public messages: Message[];
 
   constructor(private dialogFlowService: DialogflowService) { }
 
@@ -26,11 +26,11 @@ export class MessageFormComponent implements OnInit {
 
     this.dialogFlowService.getResponse(this.message.content).subscribe(res => {
       this.messages.push(
-        new Message(res.result.fulfillment.speech, 'assets/images/bot.png', res.timestamp)
+        new Message(res.result.fulfillment.speech, 'assets/images/bot.png', true, res.timestamp)
       );
     });
 
-    this.message = new Message('', 'assets/images/user.png');
+    this.message = new Message('', 'assets/images/user.png', false);
   }
 
 }
